@@ -51,6 +51,7 @@
         vertical-align: top;
         margin: 10px;
         border: 3px ridge grey;
+        transition: height 0.5s, opacity 0.5s;
         box-shadow: 5px 5px 5px #888888;
     }
 

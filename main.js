@@ -3,32 +3,32 @@ let slideWidth = 0;
 let sliderLeft = 0;
 const minHorizontalRatio = 400 / 600;
 
-function addImages() {
+const addImages = () => {
     const images = ["images2", "images1", "volcano", "peak", "river", "wheel", "img7"];
     const imageSlide = document.getElementById("imageSlide");
 
     for (let i in images) {
         const img = document.createElement("img");
-        img.src = "images/" + images[i] + ".jpg";
+        img.src = `images/${images[i]}.jpg`;
         imageSlide.appendChild(img);
     }
 
-    setTimeout(function () {
+    setTimeout(() => {
         const imageSlideImages = document.querySelectorAll("#imageSlide img");
 
-        imageSlideImages.forEach(function (img) {
+        imageSlideImages.forEach(img => {
             slideWidth += img.width + 26;
         });
 
         slideWidth += 40;
-        imageSlide.style.width = slideWidth + "px";
+        imageSlide.style.width = `${slideWidth}px`;
         sliderMax = document.getElementById("selector").offsetWidth - slideWidth;
     }, 1000);
-}
+};
 
 addImages();
 
-function slide(value) {
+const slide = (value) => {
     const oldLeft = sliderLeft;
     sliderLeft = sliderLeft + value;
 
@@ -44,17 +44,17 @@ function slide(value) {
         const imageSlide = document.getElementById("imageSlide");
 
         imageSlide.style.transition = "left 0.3s linear";
-        imageSlide.style.left = sliderLeft + "px";
+        imageSlide.style.left = `${sliderLeft}px`;
 
-        setTimeout(function () {
+        setTimeout(() => {
             slide(value);
         }, 300);
     }
 
     return false;
-}
+};
 
-function setPhoto() {
+const setPhoto = function () {
     const newPhoto = this.src;
     const horizontal = minHorizontalRatio > this.height / this.width;
     const photoImg = document.querySelector("#photo img");
@@ -62,7 +62,7 @@ function setPhoto() {
     photoImg.style.transition = "none";
     photoImg.style.opacity = 0.1;
 
-    setTimeout(function () {
+    setTimeout(() => {
         photoImg.src = newPhoto;
 
         if (horizontal) {
@@ -78,9 +78,9 @@ function setPhoto() {
     }, 500);
 
     return false;
-}
+};
 
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", () => {
     addImages();
 
     const leftButton = document.getElementById("left");
@@ -88,33 +88,33 @@ document.addEventListener("DOMContentLoaded", function () {
     const imageSlide = document.getElementById("imageSlide");
     const imageSlideImages = document.querySelectorAll("#imageSlide img");
 
-    leftButton.addEventListener("mouseenter", function () {
+    leftButton.addEventListener("mouseenter", () => {
         slide(50);
     });
 
-    leftButton.addEventListener("mouseleave", function () {
+    leftButton.addEventListener("mouseleave", () => {
         imageSlide.style.transition = "none";
         return false;
     });
 
-    rightButton.addEventListener("mouseenter", function () {
+    rightButton.addEventListener("mouseenter", () => {
         slide(-50);
     });
 
-    rightButton.addEventListener("mouseleave", function () {
+    rightButton.addEventListener("mouseleave", () => {
         imageSlide.style.transition = "none";
         return false;
     });
 
-    imageSlideImages.forEach(function (img) {
-        img.addEventListener("mouseenter", function () {
+    imageSlideImages.forEach(img => {
+        img.addEventListener("mouseenter", () => {
             img.style.transition = "height 0.5s, opacity 0.5s";
             img.style.height = "120px";
             img.style.opacity = 1;
             return false;
         });
 
-        img.addEventListener("mouseleave", function () {
+        img.addEventListener("mouseleave", () => {
             img.style.transition = "height 0.5s, opacity 0.5s";
             img.style.height = "100px";
             img.style.opacity = 0.5;
